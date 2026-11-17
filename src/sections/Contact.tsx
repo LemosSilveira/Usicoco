@@ -1,10 +1,11 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'motion/react'
+import heroPhoto from '../assets/hero/fibra-de-coco.webp'
 import { contact } from '../data/content'
 import { site } from '../data/site'
 import { buildWhatsappUrl, hasWhatsapp, quoteMessage } from '../lib/whatsapp'
 import { Button } from '../components/Button'
-import { TextureFallback } from '../components/TextureFallback'
+import { Grain } from '../components/Grain'
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
@@ -15,9 +16,10 @@ export function Contact() {
 
   return (
     <section id="contato" aria-labelledby="contato-titulo" className="section-space relative overflow-hidden bg-coco-900 text-white">
-      <div className="absolute inset-0 opacity-20">
-        <TextureFallback />
+      <div className="absolute inset-0 opacity-20" aria-hidden="true">
+        <img src={heroPhoto} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover" />
       </div>
+      <Grain />
 
       <div className="container-page relative flex flex-col items-start gap-10">
         <h2 id="contato-titulo" ref={titleRef} className="font-display">

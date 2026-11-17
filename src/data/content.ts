@@ -45,24 +45,10 @@ export const productionLine = {
   ctaMaquina: 'Solicitar orçamento desta máquina',
 }
 
-export interface Product {
-  id: string
-  name: string
-  origem: string
-  /** Caminho da foto do produto; vazio enquanto [PENDENTE] (ver PRD seção 3/10) — usa TextureFallback. */
-  image: string
-}
-
-export const products = {
+export const productsSection = {
   label: '04 — O QUE SAI DA LINHA',
   title: 'O que a casca vira',
   scrollingText: 'DESFIBRAR — CLASSIFICAR — PENEIRAR — PRENSAR —',
-  items: [
-    { id: 'fibra', name: 'Fibra de coco', origem: 'Desfibrador + Classificador', image: 'fibra.webp' },
-    { id: 'po', name: 'Pó da casca de coco', origem: 'Desfibrador', image: 'po.webp' },
-    { id: 'po-peneirado', name: 'Pó peneirado', origem: 'Peneira Rotativa', image: 'po-peneirado.webp' },
-    { id: 'fardo', name: 'Fardos de ~90 kg', origem: 'Prensa Enfardadeira', image: 'fardo.webp' },
-  ] satisfies Product[],
 }
 
 export const contact = {

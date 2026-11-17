@@ -1,15 +1,10 @@
 import { useRef } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
+import heroPhoto from '../assets/hero/fibra-de-coco.webp'
 import { hero } from '../data/content'
 import { smoothScrollTo } from '../hooks/useLenis'
-import { findAsset } from '../lib/assets'
+import { Grain } from '../components/Grain'
 import { Logo } from '../components/Logo'
-import { TextureFallback } from '../components/TextureFallback'
-
-const heroImages = import.meta.glob('../assets/hero/*.webp', {
-  eager: true,
-  import: 'default',
-}) as Record<string, string>
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
@@ -28,14 +23,13 @@ function ArrowDown() {
 }
 
 export function Hero() {
-  const photoSrc = findAsset(heroImages, 'fibra-de-coco.webp')
   const heroRef = useRef<HTMLElement>(null)
   const shouldReduceMotion = useReducedMotion()
 
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
 
-  const photoScaleLinked = useTransform(scrollYProgress, [0, 1], [1, 1.15])
-  const photoYLinked = useTransform(scrollYProgress, [0, 1], ['0%', '12%'])
+  const photoScaleLinked = useTransform(scrollYProgress, [0, 1], [1, 1.08])
+  const photoYLinked = useTransform(scrollYProgress, [0, 1], ['0%', '10%'])
   const logoOpacityLinked = useTransform(scrollYProgress, [0, 0.6], [1, 0])
   const logoYLinked = useTransform(scrollYProgress, [0, 0.6], [0, -60])
   const overlayOpacityLinked = useTransform(scrollYProgress, [0, 1], [0.55, 0.8])
@@ -56,23 +50,20 @@ export function Hero() {
 
       <div className="absolute inset-0">
         <motion.div className="absolute inset-0" style={{ scale: photoScale, y: photoY }}>
-          {photoSrc ? (
-            <img
-              src={photoSrc}
-              alt=""
-              fetchPriority="high"
-              decoding="async"
-              className="h-full w-full object-cover"
-            />
-          ) : (
-            <TextureFallback />
-          )}
+          <img
+            src={heroPhoto}
+            alt=""
+            fetchPriority="high"
+            decoding="async"
+            className="h-full w-full object-cover object-center"
+          />
         </motion.div>
         <motion.div className="absolute inset-0 bg-coco-950" style={{ opacity: overlayOpacity }} aria-hidden="true" />
         <div
           className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-coco-950/60 to-transparent"
           aria-hidden="true"
         />
+        <Grain />
       </div>
 
       <motion.div style={{ opacity: logoOpacity, y: logoYMotion }} className="relative z-10">
