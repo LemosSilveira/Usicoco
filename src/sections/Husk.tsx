@@ -32,7 +32,7 @@ export function Husk() {
         </div>
 
         <div className="flex flex-col items-start gap-6 md:col-span-5 md:justify-center">
-          <SectionLabel className="text-coco-500">{husk.label}</SectionLabel>
+          <SectionLabel className="text-white/60">{husk.label}</SectionLabel>
           <h2 id="casca-titulo" className="font-display">
             {husk.title}
           </h2>

@@ -43,7 +43,7 @@ export function Footer() {
           )}
         </div>
 
-        <div className="flex flex-col gap-1 border-t border-white/15 pt-8 font-mono text-xs text-white/60">
+        <div className="flex flex-col gap-1 border-t border-white/15 pt-8 font-mono text-xs text-white/70">
           {site.razaoSocial && <p>{site.razaoSocial}</p>}
           {site.cnpj && <p>CNPJ: {site.cnpj}</p>}
           <p>

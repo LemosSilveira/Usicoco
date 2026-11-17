@@ -51,8 +51,10 @@ interface WordProps {
 function Word({ word, highlighted, highlightClassName, index, total, scrollYProgress, reduced }: WordProps) {
   const start = index / total
   const end = (index + 1) / total
-  const opacityLinked = useTransform(scrollYProgress, [start, end], [0.15, 1])
-  const opacity = reduced ? 1 : opacityLinked
+  // Piso de opacidade alto o bastante para manter contraste AA mesmo no estado "apagado"
+  // (palavras destacadas em green-500 têm pouca margem de contraste, então não participam do fade).
+  const opacityLinked = useTransform(scrollYProgress, [start, end], [0.75, 1])
+  const opacity = reduced || highlighted ? 1 : opacityLinked
 
   return (
     <motion.span
@@ -79,7 +81,8 @@ export function WordReveal({ text, highlights = [], highlightClassName = 'text-g
   })
 
   return (
-    <p ref={containerRef} aria-label={text} className={className}>
+    <p ref={containerRef} className={className}>
+      <span className="sr-only">{text}</span>
       {words.map((word, i) => (
         <Word
           key={i}

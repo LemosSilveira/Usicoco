@@ -28,8 +28,8 @@ export const machines: Machine[] = [
     input: 'Casca de coco seco',
     output: 'Pó da casca + fibra',
     image: desfibradorDeCascas,
-    imageWidth: 1309,
-    imageHeight: 1600,
+    imageWidth: 982,
+    imageHeight: 1200,
     alt: 'Desfibrador de cascas de coco Usicoco, azul, com motor elétrico lateral',
   },
   {
@@ -42,8 +42,8 @@ export const machines: Machine[] = [
     input: 'Fibra do desfibrador',
     output: 'Fibra limpa',
     image: classificadorDeFibras,
-    imageWidth: 1273,
-    imageHeight: 1536,
+    imageWidth: 995,
+    imageHeight: 1200,
     alt: 'Classificador de fibras de coco Usicoco, estrutura azul com tambor rotativo',
   },
   {
@@ -56,8 +56,8 @@ export const machines: Machine[] = [
     input: 'Pó com restos de fibra',
     output: 'Pó peneirado',
     image: peneiraRotativa,
-    imageWidth: 1600,
-    imageHeight: 1553,
+    imageWidth: 1200,
+    imageHeight: 1165,
     alt: 'Peneira rotativa Usicoco, tambor cilíndrico azul com tela de classificação',
   },
   {
@@ -70,8 +70,8 @@ export const machines: Machine[] = [
     input: 'Fibra de coco',
     output: 'Fardos de ~90 kg',
     image: prensaEnfardadeira,
-    imageWidth: 1042,
-    imageHeight: 1600,
+    imageWidth: 782,
+    imageHeight: 1200,
     alt: 'Prensa enfardadeira Usicoco, azul e amarela, formato vertical',
   },
 ]
