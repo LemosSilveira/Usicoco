@@ -11,6 +11,7 @@ const productImages = import.meta.glob('../assets/produtos/*.webp', {
 }) as Record<string, string>
 
 const EASE = [0.22, 1, 0.36, 1] as const
+const VIEWPORT = { once: true, amount: 0.3 } as const
 
 export function Products() {
   return (
@@ -27,9 +28,9 @@ export function Products() {
             return (
               <motion.div
                 key={item.id}
-                initial={{ clipPath: 'inset(100% 0% 0% 0%)' }}
-                whileInView={{ clipPath: 'inset(0% 0% 0% 0%)' }}
-                viewport={{ once: true, amount: 0.3 }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={VIEWPORT}
                 transition={{ duration: 0.7, delay: i * 0.1, ease: EASE }}
                 className="flex flex-col gap-4"
               >

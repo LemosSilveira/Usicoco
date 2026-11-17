@@ -1,4 +1,5 @@
-import { motion } from 'motion/react'
+import { useRef } from 'react'
+import { motion, useInView } from 'motion/react'
 import { contact } from '../data/content'
 import { site } from '../data/site'
 import { buildWhatsappUrl, hasWhatsapp, quoteMessage } from '../lib/whatsapp'
@@ -9,6 +10,8 @@ const EASE = [0.22, 1, 0.36, 1] as const
 
 export function Contact() {
   const whatsappHref = hasWhatsapp ? buildWhatsappUrl(quoteMessage('')) : undefined
+  const titleRef = useRef<HTMLHeadingElement>(null)
+  const titleInView = useInView(titleRef, { once: true, amount: 0.6 })
 
   return (
     <section id="contato" aria-labelledby="contato-titulo" className="section-space relative overflow-hidden bg-coco-900 text-white">
@@ -17,13 +20,12 @@ export function Contact() {
       </div>
 
       <div className="container-page relative flex flex-col items-start gap-10">
-        <h2 id="contato-titulo" className="font-display">
+        <h2 id="contato-titulo" ref={titleRef} className="font-display">
           {contact.titleLines.map((line, i) => (
             <span key={line} className="block overflow-hidden">
               <motion.span
                 initial={{ y: '100%' }}
-                whileInView={{ y: '0%' }}
-                viewport={{ once: true, amount: 0.6 }}
+                animate={titleInView ? { y: '0%' } : undefined}
                 transition={{ duration: 0.7, delay: i * 0.12, ease: EASE }}
                 className="block"
               >

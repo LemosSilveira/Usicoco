@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react'
 import { machines } from '../data/machines'
 import { productionLine } from '../data/content'
 import { useIsDesktop } from '../hooks/useIsDesktop'
@@ -8,6 +8,7 @@ import { ProcessLine } from '../components/ProcessLine'
 import { SectionLabel } from '../components/SectionLabel'
 
 const STEPS = machines.map((m) => m.processo)
+const PANEL_COUNT = machines.length + 1
 
 function Intro() {
   return (
@@ -27,7 +28,8 @@ function Intro() {
 function HorizontalProductionLine() {
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end end'] })
-  const x = useTransform(scrollYProgress, [0, 1], ['0%', '-80%'])
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 120, damping: 26, mass: 0.4 })
+  const x = useTransform(smoothProgress, [0, 1], ['0vw', `-${(PANEL_COUNT - 1) * 100}vw`])
 
   return (
     <div ref={containerRef} className="relative bg-coco-50" style={{ height: '500vh' }}>
@@ -45,7 +47,7 @@ function HorizontalProductionLine() {
         </motion.div>
 
         <div className="container-page absolute inset-x-0 bottom-10">
-          <ProcessLine steps={STEPS} orientation="horizontal" progress={scrollYProgress} />
+          <ProcessLine steps={STEPS} orientation="horizontal" progress={smoothProgress} />
         </div>
       </div>
     </div>

@@ -88,54 +88,56 @@ export function Navbar() {
   const solidBg = scrolled || menuOpen
 
   return (
-    <motion.header
-      animate={{ y: hidden && !menuOpen ? '-100%' : '0%' }}
-      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        solidBg ? 'bg-white/85 text-blue-500 backdrop-blur-md' : 'bg-transparent text-white'
-      }`}
-    >
-      <div className="container-page flex h-20 items-center justify-between">
-        <a href="#inicio" className="shrink-0" onClick={(e) => smoothScrollTo(e, '#inicio')}>
-          <Logo variant={solidBg ? 'color' : 'white'} className="h-10 w-auto" />
-        </a>
+    <>
+      <motion.header
+        animate={{ y: hidden && !menuOpen ? '-100%' : '0%' }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+          solidBg ? 'bg-white/85 text-blue-500 backdrop-blur-md' : 'bg-transparent text-white'
+        }`}
+      >
+        <div className="container-page flex h-20 items-center justify-between">
+          <a href="#inicio" className="shrink-0" onClick={(e) => smoothScrollTo(e, '#inicio')}>
+            <Logo variant={solidBg ? 'color' : 'white'} className="h-10 w-auto" />
+          </a>
 
-        <nav className="hidden items-center gap-8 font-label md:flex" aria-label="Seções da página">
-          {nav.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="transition-opacity hover:opacity-70"
-              onClick={(e) => smoothScrollTo(e, item.href)}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
+          <nav className="hidden items-center gap-8 font-label md:flex" aria-label="Seções da página">
+            {nav.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="transition-opacity hover:opacity-70"
+                onClick={(e) => smoothScrollTo(e, item.href)}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
 
-        <div className="hidden md:block">
-          <Button href={orcamentoHref} target={hasWhatsapp ? '_blank' : undefined} rel={hasWhatsapp ? 'noreferrer' : undefined}>
-            Solicitar orçamento
-          </Button>
+          <div className="hidden md:block">
+            <Button href={orcamentoHref} target={hasWhatsapp ? '_blank' : undefined} rel={hasWhatsapp ? 'noreferrer' : undefined}>
+              Solicitar orçamento
+            </Button>
+          </div>
+
+          <button
+            type="button"
+            className="-mr-2 p-2 md:hidden"
+            aria-expanded={menuOpen}
+            aria-controls="menu-mobile"
+            aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
+            onClick={() => setMenuOpen((v) => !v)}
+          >
+            <MenuIcon open={menuOpen} />
+          </button>
         </div>
-
-        <button
-          type="button"
-          className="-mr-2 p-2 md:hidden"
-          aria-expanded={menuOpen}
-          aria-controls="menu-mobile"
-          aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
-          onClick={() => setMenuOpen((v) => !v)}
-        >
-          <MenuIcon open={menuOpen} />
-        </button>
-      </div>
+      </motion.header>
 
       {menuOpen && (
         <div
           id="menu-mobile"
           ref={panelRef}
-          className="fixed inset-0 top-20 flex flex-col gap-8 bg-coco-900 px-6 py-12 text-white md:hidden"
+          className="fixed inset-0 top-20 z-50 flex flex-col gap-8 bg-coco-900 px-6 py-12 text-white md:hidden"
         >
           <nav className="flex flex-col gap-6 font-display text-4xl" aria-label="Seções da página">
             {nav.map((item) => (
@@ -161,6 +163,6 @@ export function Navbar() {
           </Button>
         </div>
       )}
-    </motion.header>
+    </>
   )
 }

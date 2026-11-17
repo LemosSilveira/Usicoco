@@ -20,10 +20,10 @@ export function ScrollingText({ text, className = '' }: ScrollingTextProps) {
         style={{
           x,
           fontSize: 'clamp(2rem, 7vw, 6rem)',
-          WebkitTextStroke: '1px currentColor',
+          WebkitTextStroke: '1px var(--color-coco-500)',
           color: 'transparent',
         }}
-        className="inline-block font-display text-coco-500"
+        className="inline-block font-display"
       >
         {text} {text}
       </motion.span>

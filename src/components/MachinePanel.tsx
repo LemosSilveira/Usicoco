@@ -45,7 +45,7 @@ export function MachinePanel({ machine, className = '' }: MachinePanelProps) {
           viewport={VIEWPORT}
           transition={{ duration: 0.5, delay: 0.08, ease: EASE }}
           id={`maquina-${machine.id}`}
-          className="break-words font-display text-blue-500"
+          className="w-full min-w-0 break-words font-display text-blue-500"
           style={{ fontSize: 'clamp(1.5rem, 6vw, 3.5rem)' }}
         >
           {machine.name}
