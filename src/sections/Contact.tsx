@@ -1,0 +1,62 @@
+import { motion } from 'motion/react'
+import { contact } from '../data/content'
+import { site } from '../data/site'
+import { buildWhatsappUrl, hasWhatsapp, quoteMessage } from '../lib/whatsapp'
+import { Button } from '../components/Button'
+import { TextureFallback } from '../components/TextureFallback'
+
+const EASE = [0.22, 1, 0.36, 1] as const
+
+export function Contact() {
+  const whatsappHref = hasWhatsapp ? buildWhatsappUrl(quoteMessage('')) : undefined
+
+  return (
+    <section id="contato" aria-labelledby="contato-titulo" className="section-space relative overflow-hidden bg-coco-900 text-white">
+      <div className="absolute inset-0 opacity-20">
+        <TextureFallback />
+      </div>
+
+      <div className="container-page relative flex flex-col items-start gap-10">
+        <h2 id="contato-titulo" className="font-display">
+          {contact.titleLines.map((line, i) => (
+            <span key={line} className="block overflow-hidden">
+              <motion.span
+                initial={{ y: '100%' }}
+                whileInView={{ y: '0%' }}
+                viewport={{ once: true, amount: 0.6 }}
+                transition={{ duration: 0.7, delay: i * 0.12, ease: EASE }}
+                className="block"
+              >
+                {line}
+              </motion.span>
+            </span>
+          ))}
+        </h2>
+
+        <div className="flex flex-wrap items-center gap-8">
+          <Button
+            href={whatsappHref ?? '#contato'}
+            target={hasWhatsapp ? '_blank' : undefined}
+            rel={hasWhatsapp ? 'noreferrer' : undefined}
+            className="min-h-14 px-8 text-sm"
+          >
+            {contact.ctaWhatsapp}
+          </Button>
+
+          <div className="flex flex-col gap-1 font-label">
+            {site.email && (
+              <a href={`mailto:${site.email}`} className="hover:text-green-500">
+                {site.email}
+              </a>
+            )}
+            {site.telefoneExibicao && (
+              <a href={`tel:${site.telefoneExibicao}`} className="hover:text-green-500">
+                {site.telefoneExibicao}
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
